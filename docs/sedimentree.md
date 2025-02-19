@@ -178,11 +178,11 @@ Stating from `b` we still have `b,a` and from `e` we still have `e,c,a` but now 
 
 ### Chunk Boundaries
 
-We want a way to divide up the linear order into chunks in such a way that everyone agrees on the chunk boundaries. We also want to be able to do this recursively, so that we choose the boundaries for lower strata consistently. We can do this by interpreting the hash of each commit as a number and using the number of trailing zeros in the number as the level of the chunk boundary.
+We want a way to divide up the linear order into chunks in such a way that everyone agrees on the chunk boundaries. We also want to be able to do this recursively, so that we choose the boundaries for lower strata consistently. We can do this by interpreting the hash of each commit as a number and using the number of leading zeros in the number as the level of the chunk boundary.
 
-For example, if we have a commit with hash `0xbce71a3b59784f0d507fd66abeb8d95e6bb2f2d606ff159ae01f8c719b2e0000` then we can say that this is the boundary of a level 4 stratum due to the four trailing zeros. Because hashes are distributed uniformly (or else we have other problems) then the chance of any particular character in some hash being `0` is  $\frac{1}{10}$ and so the chance of having $n$ trailing zeros is $10^{-n}$ which means that we will have a hash boundary approximately every $10^{n}$ changes.
+For example, if we have a commit with hash `0xbce71a3b59784f0d507fd66abeb8d95e6bb2f2d606ff159ae01f8c719b2e0000` then we can say that this is the boundary of a level 4 stratum due to the four leading zeros. Because hashes are distributed uniformly (or else we have other problems) then the chance of any particular character in some hash being `0` is  $\frac{1}{10}$ and so the chance of having $n$ leading zeros is $10^{-n}$ which means that we will have a hash boundary approximately every $10^{n}$ changes.
 
-We are not forced to stick with base 10, we can interpret the hash as a number in some base $b$ and then the number of trailing zeros in that base will give us changes every $b^{n}$ changes.
+We are not forced to stick with base 10, we can interpret the hash as a number in some base $b$ and then the number of leading zeros in that base will give us changes every $b^{n}$ changes.
 
 ### Supporting Stratum And Checkpoint Commits
 
